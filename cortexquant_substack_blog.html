@@ -1,0 +1,552 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@400;500&display=swap');
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body, .root {
+    font-family: 'Lora', Georgia, serif;
+    color: var(--color-text-primary);
+    background: transparent;
+  }
+
+  .post {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+  }
+
+  .pub-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 2.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 0.5px solid var(--color-border-tertiary);
+  }
+
+  .pub-logo {
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    background: #2C3E50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .pub-name {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-text-primary);
+  }
+
+  .pub-tagline {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    color: var(--color-text-secondary);
+  }
+
+  .category-pill {
+    margin-left: auto;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 3px 10px;
+    border-radius: 20px;
+    background: #E6F1FB;
+    color: #0C447C;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  h1.title {
+    font-family: 'Lora', Georgia, serif;
+    font-size: clamp(26px, 5vw, 36px);
+    font-weight: 600;
+    line-height: 1.25;
+    color: var(--color-text-primary);
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+  }
+
+  .subtitle {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 17px;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
+
+  .meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    margin-bottom: 2rem;
+  }
+
+  .meta-dot { opacity: 0.4; }
+
+  .divider {
+    border: none;
+    border-top: 0.5px solid var(--color-border-tertiary);
+    margin: 2rem 0;
+  }
+
+  .lede {
+    font-size: 18px;
+    line-height: 1.75;
+    color: var(--color-text-primary);
+    margin-bottom: 1.5rem;
+    font-style: italic;
+  }
+
+  p {
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--color-text-primary);
+    margin-bottom: 1.25rem;
+  }
+
+  h2 {
+    font-family: 'Lora', Georgia, serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin: 2.5rem 0 0.75rem;
+    letter-spacing: -0.01em;
+  }
+
+  h3 {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin: 2rem 0 0.5rem;
+  }
+
+  .pullquote {
+    border-left: 3px solid #4A6CF7;
+    padding: 0.75rem 1.25rem;
+    margin: 1.75rem 0;
+    background: var(--color-background-secondary);
+    border-radius: 0 6px 6px 0;
+  }
+
+  .pullquote p {
+    font-size: 17px;
+    font-style: italic;
+    color: var(--color-text-primary);
+    margin: 0;
+    line-height: 1.7;
+  }
+
+  .math-block {
+    background: var(--color-background-secondary);
+    border: 0.5px solid var(--color-border-tertiary);
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    margin: 1.25rem 0;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    overflow-x: auto;
+    color: var(--color-text-primary);
+    line-height: 1.7;
+  }
+
+  .math-label {
+    font-size: 11px;
+    font-family: 'DM Sans', sans-serif;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 4px;
+  }
+
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 10px;
+    margin: 1.5rem 0;
+  }
+
+  .stat-card {
+    background: var(--color-background-secondary);
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+  }
+
+  .stat-value {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 26px;
+    font-weight: 500;
+    color: #4A6CF7;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .stat-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    color: var(--color-text-secondary);
+    line-height: 1.4;
+  }
+
+  .algo-box {
+    border: 0.5px solid var(--color-border-secondary);
+    border-radius: 10px;
+    padding: 1.25rem 1.5rem;
+    margin: 1.5rem 0;
+    background: var(--color-background-primary);
+  }
+
+  .algo-title {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-text-secondary);
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 0.5px solid var(--color-border-tertiary);
+  }
+
+  .algo-step {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 0.5rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: var(--color-text-primary);
+    line-height: 1.6;
+  }
+
+  .step-num {
+    font-weight: 500;
+    color: #4A6CF7;
+    min-width: 18px;
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  .result-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    margin: 1.25rem 0;
+  }
+
+  .result-table th {
+    text-align: left;
+    padding: 8px 12px;
+    color: var(--color-text-secondary);
+    font-weight: 500;
+    border-bottom: 1px solid var(--color-border-tertiary);
+    background: var(--color-background-secondary);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .result-table td {
+    padding: 8px 12px;
+    border-bottom: 0.5px solid var(--color-border-tertiary);
+    color: var(--color-text-primary);
+  }
+
+  .result-table tr:last-child td { border-bottom: none; }
+
+  .highlight-row td { font-weight: 500; color: #185FA5; }
+
+  .tag-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin: 2rem 0 0.5rem;
+  }
+
+  .tag {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    border: 0.5px solid var(--color-border-secondary);
+    color: var(--color-text-secondary);
+  }
+
+  .footer-divider {
+    border: none;
+    border-top: 0.5px solid var(--color-border-tertiary);
+    margin: 2.5rem 0 1.5rem;
+  }
+
+  .footer-cta {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    text-align: center;
+    line-height: 1.7;
+  }
+
+  code {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    background: var(--color-background-secondary);
+    padding: 1px 5px;
+    border-radius: 4px;
+    color: var(--color-text-primary);
+  }
+</style>
+
+<div class="post">
+
+  <div class="pub-header">
+    <div class="pub-logo">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="6" cy="7" r="3" fill="#4A6CF7"/>
+        <circle cx="12" cy="7" r="3" fill="#8E44AD"/>
+        <circle cx="9" cy="12" r="3" fill="#F39C12"/>
+        <circle cx="9" cy="6" r="2" fill="#2ECC71"/>
+      </svg>
+    </div>
+    <div>
+      <div class="pub-name">CortexPod Research</div>
+      <div class="pub-tagline">Machine Learning · Quantization · Systems</div>
+    </div>
+    <div class="category-pill">Research Paper</div>
+  </div>
+
+  <h1 class="title">CortexQuant: Compressing High-Dimensional Vectors — Provably Near-Optimal</h1>
+  <p class="subtitle">A data-oblivious algorithm that achieves near-optimal distortion rates for both MSE and inner product estimation, with zero calibration overhead.</p>
+
+  <div class="meta">
+    <span>CortexPod Team</span>
+    <span class="meta-dot">·</span>
+    <span>April 2025</span>
+    <span class="meta-dot">·</span>
+    <span>12 min read</span>
+  </div>
+
+  <hr class="divider">
+
+  <p class="lede">What if you could compress your KV cache by 5× — and prove, mathematically, that you're within a constant factor of the best possible?</p>
+
+  <p>That's the core premise of CortexQuant, a vector quantization algorithm we designed from first principles. The result: a quantizer that is online (no calibration, no codebook training), GPU-friendly, and provably near-optimal in both mean-squared error and inner product distortion — for any bit-width and dimension.</p>
+
+  <hr class="divider">
+
+  <h2>Why vector quantization is hard</h2>
+
+  <p>Vector quantization (VQ) maps a floating-point vector <strong>x</strong> ∈ ℝ<sup>d</sup> to a short binary string, then reconstructs an approximation. The distortion is unavoidable — the question is how small you can make it.</p>
+
+  <p>Shannon's source coding theory tells us there's a fundamental lower bound on achievable distortion for any compression scheme. Most practical algorithms — including product quantization (PQ), the industry workhorse — fall far short of this bound. They also require expensive offline training (k-means codebooks), making them unsuitable for online settings like KV cache quantization, where vectors arrive in real time.</p>
+
+  <div class="pullquote">
+    <p>Existing algorithms either have suboptimal distortion bounds relative to bit-width, or they're too slow for online inference. CortexQuant addresses both simultaneously.</p>
+  </div>
+
+  <p>We set two distortion objectives. Given a quantizer <em>Q</em> and reconstruction <em>Q</em><sup>−1</sup>:</p>
+
+  <div class="math-block">
+    <div class="math-label">MSE distortion</div>
+    D<sub>mse</sub> := 𝔼<sub>Q</sub>[ ‖x − Q<sup>−1</sup>(Q(x))‖<sub>2</sub><sup>2</sup> ]
+  </div>
+
+  <div class="math-block">
+    <div class="math-label">Inner product distortion</div>
+    D<sub>prod</sub> := 𝔼<sub>Q</sub>[ | ⟨y, x⟩ − ⟨y, Q<sup>−1</sup>(Q(x))⟩ |<sup>2</sup> ]
+  </div>
+
+  <p>For inner product estimation, we additionally require the estimator to be <em>unbiased</em>: 𝔼[⟨y, Q<sup>−1</sup>(Q(x))⟩] = ⟨y, x⟩.</p>
+
+  <hr class="divider">
+
+  <h2>The key insight: random rotation induces a known distribution</h2>
+
+  <p>CortexQuant begins by multiplying any input vector <strong>x</strong> ∈ 𝕊<sup>d−1</sup> by a random rotation matrix <strong>Π</strong>. The rotated vector <strong>Π·x</strong> is now uniformly distributed on the unit hypersphere — regardless of what <strong>x</strong> was.</p>
+
+  <p>A classical result tells us exactly what each coordinate of such a vector looks like:</p>
+
+  <div class="math-block">
+    <div class="math-label">Lemma 1 — coordinate distribution on hypersphere</div>
+    x<sub>j</sub> ~ f<sub>X</sub>(x) = [Γ(d/2) / (√π · Γ((d−1)/2))] · (1 − x²)<sup>(d−3)/2</sup>
+    <br><br>
+    In high dimensions: f<sub>X</sub>(·) → 𝒩(0, 1/d)
+  </div>
+
+  <p>This is powerful for two reasons. First, each coordinate follows a <em>known</em> distribution — so we can precompute the optimal scalar quantizer for it exactly. Second, in high dimensions, distinct coordinates become nearly independent, so we can quantize them separately without losing optimality.</p>
+
+  <hr class="divider">
+
+  <h2>MSE-optimal CortexQuant</h2>
+
+  <h3>The algorithm</h3>
+
+  <div class="algo-box">
+    <div class="algo-title">CortexQuant<sub>mse</sub> — Quantization</div>
+    <div class="algo-step"><span class="step-num">1.</span><span>Precompute a random rotation matrix <strong>Π</strong> and solve the 1D k-means problem for a Beta distribution to get centroids c<sub>1</sub>, …, c<sub>2<sup>b</sup></sub>.</span></div>
+    <div class="algo-step"><span class="step-num">2.</span><span>Rotate: <strong>y</strong> ← <strong>Π</strong> · <strong>x</strong></span></div>
+    <div class="algo-step"><span class="step-num">3.</span><span>For each coordinate j, store idx<sub>j</sub> = argmin<sub>k</sub> |y<sub>j</sub> − c<sub>k</sub>|</span></div>
+    <div class="algo-step"><span class="step-num">4.</span><span>Reconstruct: retrieve centroids → rotate back via <strong>Π</strong><sup>⊤</sup></span></div>
+  </div>
+
+  <p>The codebooks are computed once by solving the continuous k-means problem using the Lloyd-Max algorithm. No per-dataset training is ever needed again.</p>
+
+  <p>We prove a tight distortion bound:</p>
+
+  <div class="math-block">
+    <div class="math-label">Theorem 1 — MSE upper bound</div>
+    D<sub>mse</sub> ≤ (√3 · π / 2) · (1 / 4<sup>b</sup>)
+  </div>
+
+  <div class="stat-grid">
+    <div class="stat-card">
+      <span class="stat-value">0.36</span>
+      <span class="stat-label">D<sub>mse</sub> at b=1</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-value">0.117</span>
+      <span class="stat-label">D<sub>mse</sub> at b=2</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-value">0.03</span>
+      <span class="stat-label">D<sub>mse</sub> at b=3</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-value">0.009</span>
+      <span class="stat-label">D<sub>mse</sub> at b=4</span>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <h2>Why MSE-optimal ≠ inner product unbiased</h2>
+
+  <p>Here's an important subtlety. At 1-bit, the MSE-optimal quantizer maps to signs: Q<sub>mse</sub>(<strong>x</strong>) = sign(<strong>Π</strong> · <strong>x</strong>). When you use this for inner product estimation, you get:</p>
+
+  <div class="math-block">
+    𝔼[ ⟨y, Q<sup>−1</sup><sub>mse</sub>(Q<sub>mse</sub>(x))⟩ ] = (2/π) · ⟨y, x⟩
+  </div>
+
+  <p>That factor of 2/π ≈ 0.637 is a multiplicative bias that cannot be calibrated away without knowing the true inner product. The bias diminishes as b increases, but it's meaningful at low bit-widths — precisely where quantization matters most.</p>
+
+  <hr class="divider">
+
+  <h2>Inner product CortexQuant: a two-stage fix</h2>
+
+  <p>The solution is elegant. Rather than trying to fix the bias directly, we use a two-stage approach:</p>
+
+  <div class="algo-box">
+    <div class="algo-title">CortexQuant<sub>prod</sub> — Two-stage algorithm</div>
+    <div class="algo-step"><span class="step-num">1.</span><span>Apply Q<sub>mse</sub> with bit-width b−1. This minimizes ‖r‖<sub>2</sub> where r = x − Q<sup>−1</sup><sub>mse</sub>(Q<sub>mse</sub>(x)) is the residual.</span></div>
+    <div class="algo-step"><span class="step-num">2.</span><span>Apply a 1-bit QJL transform on the residual: qjl ← sign(<strong>S</strong> · <strong>r</strong>), where <strong>S</strong> ~ 𝒩(0,1) is a random Gaussian matrix.</span></div>
+    <div class="algo-step"><span class="step-num">3.</span><span>Dequantize: x̃ = x̃<sub>mse</sub> + (√(π/2) / d) · ‖r‖<sub>2</sub> · <strong>S</strong><sup>⊤</sup> · qjl</span></div>
+  </div>
+
+  <p>The QJL step provides an unbiased estimate of the residual inner product (by the Johnson-Lindenstrauss lemma), while the MSE stage ensures the residual is as small as possible. Total bit budget: still b bits per coordinate.</p>
+
+  <div class="math-block">
+    <div class="math-label">Theorem 2 — inner product distortion bound</div>
+    D<sub>prod</sub> ≤ (√3 · π² · ‖y‖<sub>2</sub><sup>2</sup> / d) · (1 / 4<sup>b</sup>)
+    <br><br>
+    And: 𝔼[ ⟨y, Q<sup>−1</sup><sub>prod</sub>(Q<sub>prod</sub>(x))⟩ ] = ⟨y, x⟩ &nbsp; (unbiased ✓)
+  </div>
+
+  <hr class="divider">
+
+  <h2>How close to optimal? A formal lower bound</h2>
+
+  <p>Using Yao's minimax principle combined with Shannon's lower bound, we prove that <em>no</em> randomized quantizer can do better than:</p>
+
+  <div class="math-block">
+    <div class="math-label">Theorem 3 — information-theoretic lower bounds</div>
+    D<sub>mse</sub> ≥ 1 / 4<sup>b</sup>
+    <br>
+    D<sub>prod</sub> ≥ ‖y‖<sub>2</sub><sup>2</sup> / (d · 4<sup>b</sup>)
+  </div>
+
+  <p>Comparing with our upper bounds, CortexQuant is within a factor of at most √3·π/2 ≈ <strong>2.7×</strong> of the information-theoretic optimum — for all bit-widths and all dimensions. At b=1, the gap shrinks to just ~1.45×.</p>
+
+  <hr class="divider">
+
+  <h2>Experimental results</h2>
+
+  <h3>KV cache: needle-in-a-haystack</h3>
+
+  <p>We tested CortexQuant on KV cache compression for <code>Llama-3.1-8B-Instruct</code> with context lengths from 4k to 104k tokens, using a 4× compression ratio (25% of full cache):</p>
+
+  <table class="result-table">
+    <thead>
+      <tr><th>Method</th><th>Recall score</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>SnapKV</td><td>0.858</td></tr>
+      <tr><td>PyramidKV</td><td>0.895</td></tr>
+      <tr><td>KIVI</td><td>0.981</td></tr>
+      <tr><td>PolarQuant</td><td>0.995</td></tr>
+      <tr><td>Full precision</td><td>0.997</td></tr>
+      <tr class="highlight-row"><td>CortexQuant (ours)</td><td>0.997</td></tr>
+    </tbody>
+  </table>
+
+  <p>CortexQuant matches full-precision recall exactly, even at 4× compression.</p>
+
+  <h3>LongBench end-to-end generation</h3>
+
+  <p>On LongBench-E with Llama-3.1-8B-Instruct, CortexQuant at 3.5 bits matches the full-cache average score of 50.06, while KIVI at 5 bits scores 50.16 and PolarQuant at 3.9 bits scores 49.78. At 2.5 bits, CortexQuant still achieves 49.44 — a marginal degradation while compressing by over 5×.</p>
+
+  <p>Our non-integer bit-widths (2.5, 3.5) come from splitting channels into outlier and non-outlier sets and applying two independent CortexQuant instances at different precisions.</p>
+
+  <h3>Nearest neighbor search: indexing time</h3>
+
+  <table class="result-table">
+    <thead>
+      <tr><th>Method</th><th>d=200</th><th>d=1536</th><th>d=3072</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Product Quantization</td><td>37s</td><td>240s</td><td>494s</td></tr>
+      <tr><td>RabitQ</td><td>597s</td><td>2268s</td><td>3957s</td></tr>
+      <tr class="highlight-row"><td>CortexQuant (ours)</td><td>0.0007s</td><td>0.0013s</td><td>0.0021s</td></tr>
+    </tbody>
+  </table>
+
+  <p>CortexQuant requires essentially zero indexing time — there are no codebooks to train. Despite this, it consistently outperforms both PQ and RabitQ in recall across DBpedia (1536-d, 3072-d) and GloVe (200-d) benchmarks.</p>
+
+  <hr class="divider">
+
+  <h2>Why this matters</h2>
+
+  <p>The core contribution is not just empirical performance — it's the provable guarantee. For applications like KV cache quantization, where you cannot run offline calibration on the incoming token stream, having a quantizer that is simultaneously online, GPU-friendly, unbiased, and within 2.7× of the fundamental limit is qualitatively new.</p>
+
+  <div class="pullquote">
+    <p>The exponential improvement in bit-width dependence (1/4<sup>b</sup> rather than 1/2<sup>b</sup> or worse) means each additional bit buys you twice as much distortion reduction as competing methods provide.</p>
+  </div>
+
+  <p>Entropy coding of the codebook pointers can further reduce the effective bit-width at no distortion cost — though the gain is modest enough (≈5% at b=4) that we keep the algorithm simple and fast by default.</p>
+
+  <hr class="footer-divider">
+
+  <div class="tag-row">
+    <span class="tag">Vector Quantization</span>
+    <span class="tag">KV Cache</span>
+    <span class="tag">LLM Inference</span>
+    <span class="tag">Nearest Neighbor Search</span>
+    <span class="tag">Information Theory</span>
+  </div>
+
+  <div class="footer-cta">
+    Full proofs, algorithms, and experimental details available in the paper.<br>
+    Code release coming soon.
+  </div>
+
+</div>
